@@ -105,9 +105,9 @@ def get_avg_of_report(hours:int,directory:str)->dict:
     reports=get_reports_younger_than(hours, directory)
     # return reports
     rep=None
-    
+
     for report in reports:
-        r=get_report(report)
+        r=get_report(report, directory)
         if rep is None:
             rep = r
         else:
