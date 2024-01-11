@@ -103,10 +103,20 @@ def get_reports_younger_than(hours:int, directory:str)->list:
 
 def get_avg_of_report(hours:int,directory:str)->dict:
     reports=get_reports_younger_than(hours, directory)
-    return reports
-    rep={}
+    # return reports
+    rep=None
+    
     for report in reports:
         r=get_report(report)
+        if rep is None:
+            rep = r
+        else:
+            rep["cpu"] += r["cpu"]
+            rep["memory"] += r["memory"]
+    rep["cpu"] /= len(reports)
+    rep["memory"] /= len(reports)
+    return rep
+
 
 directory = "./monit"
 
