@@ -1,9 +1,12 @@
 import psutil
-import os
-import socket
 import time
+import json
 
-print(f"Cpu usage {psutil.cpu_percent(1)}")
+def get_config()->dict:
+    with open("config.json", "r") as f:
+        return json.load(f)
+
+
 
 def get_cpu_usage()->float:
     return psutil.cpu_percent(1)
@@ -36,6 +39,8 @@ def get_used_ports()->list:
         rep.append(port[3][1])
     return rep
 
+print(f"Used ports {get_used_ports()}")
+
 def not_in_list(liste:list, element)->bool:
     return element not in liste
 
@@ -46,4 +51,6 @@ def get_ports_open(ports:list)->dict:
         rep[port] = not_in_list(used_ports, port)
     return rep
 
-print(f"Ports {get_ports_open([22, 80, 443])}")
+print(f"Ports {get_ports_open(get_config()['portsRange'])}")
+
+print(f"Config {get_config()}")
