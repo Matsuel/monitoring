@@ -64,36 +64,57 @@ def create_report()->dict:
         "ports": get_ports_open()
     }
 
-def create_report_directory():
-    if not os.path.exists("/var/monit"):
-        os.mkdir("/var/monit")
+def create_report_directory(directory:str):
+    if not os.path.exists(directory):
+        os.mkdir(directory)
 
-def save_report(report:dict):
-    create_report_directory()
-    with open(f"./monit/{report['id']}.json", "w") as f:
+def save_report(report:dict,directory:str):
+    create_report_directory(directory)
+    with open(f"{directory}/{report['id']}.json", "w") as f:
         json.dump(report, f, indent=4)
 
-def get_all_reports()->list:
-    create_report_directory()
-    return os.listdir("/var/monit")
+def get_all_reports(directory:str)->list:
+    create_report_directory(directory)
+    return os.listdir(directory)
 
-def get_last_report()->dict:
-    create_report_directory()
+def get_last_report(directory:str)->dict:
+    create_report_directory(directory)
     last=None
-    for file in os.listdir("/var/monit"):
+    for file in os.listdir(directory):
         if last is None:
             last = file
-        elif os.path.getmtime(f"/var/monit/{file}") > os.path.getmtime(f"/var/monit/{last}"):
+        elif os.path.getmtime(f"{directory}/{file}") > os.path.getmtime(f"{directory}/{last}"):
             last = file
-    with open(f"/var/monit/{last}", "r") as f:
+    with open(f"{directory}/{last}", "r") as f:
         return json.load(f)
-        
+    
+def get_report(name:str, directory:str)->dict:
+    create_report_directory(directory)
+    with open(f"{directory}/{name}", "r") as f:
+        return json.load(f)
+    
+def get_reports_younger_than(hours:int, directory:str)->list:
+    create_report_directory(directory)
+    rep=[]
+    for file in os.listdir(directory):
+        if time.time() - os.path.getmtime(f"{directory}/{file}") < hours*60*60:
+            rep.append(file)
+    return rep    
 
-print(args)
+def get_avg_of_report(hours:int,directory:str)->dict:
+    reports=get_reports_younger_than(hours, directory)
+    return reports
+    rep={}
+    for report in reports:
+        r=get_report(report)
+
+directory = "./monit"
 
 if args.check:
-    save_report(create_report())
+    save_report(create_report(), directory)
 elif args.list:
-    print(get_all_reports())
+    print(get_all_reports(directory))
 elif args.get_last:
-    print(get_last_report())
+    print(get_last_report(directory))
+elif args.get_avg:
+    print(get_avg_of_report(int(args.get_avg[0]), directory))
