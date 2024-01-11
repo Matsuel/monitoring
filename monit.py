@@ -1,6 +1,15 @@
 import psutil
 import time
 import json
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--check", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
+parser.add_argument("--list", help="Renvoie la liste des rapport json")
+parser.add_argument("--get_last", help="Renvoie le dernier rapport json")
+parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
+args = parser.parse_args()
+
 
 def get_config()->dict:
     with open("config.json", "r") as f:
