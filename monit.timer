@@ -3,4 +3,5 @@ Description="Timer exécutant toutes 10 secondes le service de check"
 
 [Timer]
 Unit=monit.service
+Restart=always
 OnUnitActiveSec=1
