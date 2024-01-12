@@ -3,4 +3,4 @@ Description="Timer exécutant toutes 10 secondes le service de check"
 
 [Timer]
 Unit=monit.service
-OnUnitActiveSec=10
+OnUnitActiveSec=1
