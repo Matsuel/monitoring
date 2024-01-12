@@ -5,9 +5,9 @@ if [ "$EUID" -ne 0 ]
     exit
 fi
 
-mkdir /var/log/monit
+mkdir -p /var/log/monit
 mkdir -p /etc/monit/conf.d
-mkdir /var/monit
+mkdir -p /var/monit
 
 # Change la propriété des dossiers à l'utilisateur actuellement connecté
 chown -R $SUDO_USER:$SUDO_USER /var/log/monit
