@@ -4,6 +4,7 @@ import json
 import argparse
 import uuid
 import os
+import logging
 
 parser = argparse.ArgumentParser()
 # parser.add_argument("--check","-c",action="store_true", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
@@ -76,9 +77,11 @@ def save_report(report:dict,directory:str):
     create_report_directory(directory)
     with open(f"{directory}/{report['id']}.json", "w") as f:
         json.dump(report, f, indent=4)
+    log(f"Report {report['id']} saved")
 
 def get_all_reports(directory:str)->list:
     create_report_directory(directory)
+    log(f"Get all reports")
     return os.listdir(directory)
 
 def get_last_report(directory:str)->dict:
@@ -89,6 +92,7 @@ def get_last_report(directory:str)->dict:
             last = file
         elif os.path.getmtime(f"{directory}/{file}") > os.path.getmtime(f"{directory}/{last}"):
             last = file
+    log(f"Get last report {last['id']}")
     with open(f"{directory}/{last}", "r") as f:
         return json.load(f)
     
@@ -107,6 +111,7 @@ def get_reports_younger_than(hours:int, directory:str)->list:
 
 def get_avg_of_report(hours:int,directory:str)->dict:
     reports=get_reports_younger_than(hours, directory)
+    log(f"Get avg of {hours} last hours")
     # return reports
     rep=None
 
@@ -127,10 +132,18 @@ def create_config_directory(directory:str):
     if not os.path.exists(directory):
         os.mkdir(directory)
 
+def create_log_file():
+    if not os.path.exists("/var/log/monit"):
+        os.mkdir("/var/log/monit")
+    logging.basicConfig(filename='/var/log/monit/monit.log', level=logging.INFO, format='%(asctime)s %(message)s')
+
+def log(message:str):
+    logging.info(message)
 
 
 if __name__ == "__main__":
     create_config_directory(directory)
+    create_log_file()
     if args.command == "check":
         save_report(create_report(), directory)
     elif args.command == "list":
