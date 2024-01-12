@@ -93,8 +93,9 @@ def get_last_report(directory:str)->dict:
         elif os.path.getmtime(f"{directory}/{file}") > os.path.getmtime(f"{directory}/{last}"):
             last = file
     with open(f"{directory}/{last}", "r") as f:
-        # log(f"Get last report {json.load(f)['id']}")
-        return json.load(f)
+        content = json.load(f)
+        log(f"Get last report {content['id']}")
+        return content
     
 def get_report(name:str, directory:str)->dict:
     create_report_directory(directory)
