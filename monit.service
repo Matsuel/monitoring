@@ -1,6 +1,6 @@
 [Unit]
-Description= "Scirpt permettant de récupérer les infos sur les performances de votre pc"
+Description= "Script permettant de récupérer les infos sur les performances de votre pc"
 
 [Service]
 Type=oneshot
-ExecStart= python3 /home/mat/monitoring/monit.py check
+ExecStart=/usr/bin/python3 /home/mat/monitoring/monit.py check
