@@ -19,7 +19,7 @@ args = parser.parse_args()
 
 
 def get_config()->dict:
-    with open("config.json", "r") as f:
+    with open("/etc/monit/conf.d/config.json", "r") as f:
         return json.load(f)
 
 def get_cpu_usage()->float:
