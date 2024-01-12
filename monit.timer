@@ -1,0 +1,7 @@
+[Unit]
+Description="Timer exécutant toutes 10 secondes le service de check"
+Requires=monit.service
+
+[Timer]
+Unit=monit.service
+OnCalendar=*-*-* *:*:30
