@@ -121,8 +121,26 @@ def get_avg_of_report(hours:int,directory:str)->dict:
     rep["memory"] /= len(reports)
     return rep
 
-
 directory = "/var/monit"
+
+def create_config_directory(directory:str):
+    if not os.path.exists(directory):
+        os.mkdir(directory)
+
+
+
+if __name__ == "__main__":
+    create_config_directory(directory)
+    if args.command == "check":
+        save_report(create_report(), directory)
+    elif args.command == "list":
+        print(get_all_reports(directory))
+    elif args.command == "get":
+        if args.parameter[0] == "last":
+            print(get_last_report(directory))
+        elif args.parameter[0] == "avg":
+            print(get_avg_of_report(int(args.parameter[1]), directory))
+
 
 # if args.check:
 #     save_report(create_report(), directory)
@@ -132,13 +150,3 @@ directory = "/var/monit"
 #     print(get_last_report(directory))
 # elif args.get_avg:
 #     print(get_avg_of_report(int(args.get_avg[0]), directory))
-
-if args.command == "check":
-    save_report(create_report(), directory)
-elif args.command == "list":
-    print(get_all_reports(directory))
-elif args.command == "get":
-    if args.parameter[0] == "last":
-        print(get_last_report(directory))
-    elif args.parameter[0] == "avg":
-        print(get_avg_of_report(int(args.parameter[1]), directory))
