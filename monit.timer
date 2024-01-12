@@ -4,4 +4,4 @@ Requires=monit.service
 
 [Timer]
 Unit=monit.service
-OnCalendar=*-*-* *:*:10
+OnCalendar=*-*-* *:*:0/10
