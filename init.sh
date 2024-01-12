@@ -11,6 +11,11 @@ mkdir -p /var/log/monit
 mkdir -p /etc/monit/conf.d
 mkdir -p /var/monit
 
+# Change la propriété des dossiers à l'utilisateur actuellement connecté
+chown -R $SUDO_USER:$SUDO_USER /var/log/monit
+chown -R $SUDO_USER:$SUDO_USER /etc/monit/conf.d
+chown -R $SUDO_USER:$SUDO_USER /var/monit
+
 # Crée le fichier monit.log s'il n'existe pas
 touch /var/log/monit/monit.log
 
