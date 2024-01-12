@@ -76,7 +76,7 @@ def create_report_directory(directory:str):
 def save_report(report:dict,directory:str):
     create_report_directory(directory)
     with open(f"{directory}/{report['id']}.json", "w") as f:
-        json.dump(report, f, indent=4)
+        json.dump(report, f)
     log(f"Report {report['id']} saved")
 
 def get_all_reports(directory:str)->list:
