@@ -16,3 +16,5 @@ chown -R $SUDO_USER:$SUDO_USER /var/monit
 
 # Copie le fichier config.json dans le dossier /etc/monit/conf.d
 cp config.json /etc/monit/conf.d/
+cp monit.service /etc/systemd/system/
+cp monit.timer /etc/systemd/system/
