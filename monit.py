@@ -6,10 +6,14 @@ import uuid
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--check","-c",action="store_true", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
-parser.add_argument("--list","-l", action="store_true", help="Renvoie la liste des rapport json")
-parser.add_argument("--get_last", action="store_true", help="Renvoie le dernier rapport json")
-parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
+# parser.add_argument("--check","-c",action="store_true", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
+# parser.add_argument("--list","-l", action="store_true", help="Renvoie la liste des rapport json")
+# parser.add_argument("--get_last", action="store_true", help="Renvoie le dernier rapport json")
+# parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
+# args = parser.parse_args()
+
+parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
+parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
 args = parser.parse_args()
 
 
@@ -120,11 +124,21 @@ def get_avg_of_report(hours:int,directory:str)->dict:
 
 directory = "./monit"
 
-if args.check:
+# if args.check:
+#     save_report(create_report(), directory)
+# elif args.list:
+#     print(get_all_reports(directory))
+# elif args.get_last:
+#     print(get_last_report(directory))
+# elif args.get_avg:
+#     print(get_avg_of_report(int(args.get_avg[0]), directory))
+
+if args.command == "check":
     save_report(create_report(), directory)
-elif args.list:
+elif args.command == "list":
     print(get_all_reports(directory))
-elif args.get_last:
-    print(get_last_report(directory))
-elif args.get_avg:
-    print(get_avg_of_report(int(args.get_avg[0]), directory))
+elif args.command == "get":
+    if args.parameter[0] == "last":
+        print(get_last_report(directory))
+    elif args.parameter[0] == "avg":
+        print(get_avg_of_report(int(args.parameter[1]), directory))
