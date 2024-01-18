@@ -57,7 +57,7 @@ def get_avg(hours):
 
 
 @app.route('/check', methods=['GET'])
-def check():
+def check():    
     return jsonify({"report": create_report()})
 
 @app.route('/<path:dummy>')
