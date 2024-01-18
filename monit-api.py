@@ -33,7 +33,7 @@ def get_last():
 #Get report content by name if name is provided
 @app.route('/api/v1.0/get/report/<string:name>', methods=['GET'])
 def get_report_by_name(name):
-    report = get_report(name, directory)
+    report = get_report(name, directory) if name.endswith(".json") else get_report(f"{name}.json", directory)
     if not name:
         return jsonify({"error": "Report name required"})
     if name.endswith(".json"):
