@@ -7,7 +7,7 @@ import os
 import logging
 
 def get_config()->dict:
-    with open("/etc/monit/conf.d/config.json", "r") as f:
+    with open(f"{directory_config}/config.json", "r") as f:
         return json.load(f)
 
 def get_cpu_usage()->float:
@@ -123,9 +123,12 @@ def get_avg_of_report(hours:int,directory:str)->dict:
         else:
             rep["cpu"] += r["cpu"]
             rep["memory"] += r["memory"]
-    rep["cpu"] /= len(reports)
-    rep["memory"] /= len(reports)
-    return rep
+    if rep is not None:
+        rep["cpu"] /= len(reports)
+        rep["memory"] /= len(reports)
+        return rep
+    else:
+        return None
 
 directory = "/var/monit" if os.name == "posix" else "./monit"
 directory_log = "/var/log/monit" if os.name == "posix" else "./log"
@@ -136,9 +139,9 @@ def create_config_directory(directory:str):
         os.mkdir(directory)
 
 def create_log_file():
-    if not os.path.exists("/var/log/monit"):
-        os.mkdir("/var/log/monit")
-    logging.basicConfig(filename='/var/log/monit/monit.log', level=logging.INFO, format='%(asctime)s %(message)s')
+    if not os.path.exists(directory_log):
+        os.mkdir(directory_log)
+    logging.basicConfig(filename=f"{directory_log}/monit.log", level=logging.INFO, format='%(asctime)s %(message)s')
 
 def log(message:str):
     logging.info(message)
