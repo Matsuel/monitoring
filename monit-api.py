@@ -1,6 +1,7 @@
 from  flask import Flask, jsonify, request
 import json
 from monit import get_report, get_all_reports, get_last_report, get_avg_of_report, create_report
+import argparse
 
 app = Flask(__name__)
 directory  = "./monit"
@@ -44,4 +45,13 @@ def check():
 
 
 if (__name__ == "__main__"):
-    app.run(debug=True, port=5000)
+    # app.run(debug=True, port=5000)
+
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("-p", "--port", help="Port to listen on", type=int, default=5000)
+    argparser.add_argument("-a", "--address", help="Address to listen on")
+    args = argparser.parse_args()
+    if not args.address or not args.port:
+        raise Exception("Address and port required")
+    
+    app.run(host=args.address, port=args.port, debug=True)
