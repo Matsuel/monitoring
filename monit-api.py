@@ -58,8 +58,7 @@ def get_avg(hours):
 
 @app.route('/check', methods=['GET'])
 def check():
-    create_report()
-    return jsonify({"report": get_last_report(directory)})
+    return jsonify({"report": create_report()})
 
 @app.route('/<path:dummy>')
 def redirect_error(dummy):
