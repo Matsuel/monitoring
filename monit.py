@@ -6,18 +6,6 @@ import uuid
 import os
 import logging
 
-parser = argparse.ArgumentParser()
-# parser.add_argument("--check","-c",action="store_true", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
-# parser.add_argument("--list","-l", action="store_true", help="Renvoie la liste des rapport json")
-# parser.add_argument("--get_last", action="store_true", help="Renvoie le dernier rapport json")
-# parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
-# args = parser.parse_args()
-
-parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
-parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
-args = parser.parse_args()
-
-
 def get_config()->dict:
     with open("/etc/monit/conf.d/config.json", "r") as f:
         return json.load(f)
@@ -147,6 +135,17 @@ def log(message:str):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    # parser.add_argument("--check","-c",action="store_true", help="Check la valeur du cpu, de la ram, des ports et de l'espace disque et renvoie un json")
+    # parser.add_argument("--list","-l", action="store_true", help="Renvoie la liste des rapport json")
+    # parser.add_argument("--get_last", action="store_true", help="Renvoie le dernier rapport json")
+    # parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
+    # args = parser.parse_args()
+    
+    parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
+    parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
+    args = parser.parse_args()
+
     create_config_directory(directory)
     create_log_file()
     if args.command == "check":
