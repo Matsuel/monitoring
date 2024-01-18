@@ -3,5 +3,6 @@ Description="Timer exécutant toutes 10 secondes le service de check"
 
 [Timer]
 Unit=monit.service
-Restart=always
-OnUnitInactiveSec=10
+OnUnitActiveSec=10s
+
+#Finir ça
