@@ -154,6 +154,10 @@ if __name__ == "__main__":
             print(get_last_report(directory))
         elif args.parameter[0] == "avg":
             print(get_avg_of_report(int(args.parameter[1]), directory))
+        elif args.parameter[0] == "name":
+            print(get_report(args.parameter[1], directory))
+    else:
+        print("Cette commande n'existe pas ! Les commandes disponibles sont : check, list, get voir plus d'infos avec --help")
 
 
 # if args.check:
