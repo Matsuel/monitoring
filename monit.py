@@ -127,7 +127,7 @@ def get_avg_of_report(hours:int,directory:str)->dict:
     rep["memory"] /= len(reports)
     return rep
 
-directory = "/var/monit"
+directory = "/var/monit" if os.name == "posix" else "./monit"
 
 def create_config_directory(directory:str):
     if not os.path.exists(directory):

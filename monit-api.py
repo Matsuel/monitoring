@@ -2,9 +2,10 @@ from  flask import Flask, jsonify, request, redirect
 import json
 from monit import get_report, get_all_reports, get_last_report, get_avg_of_report, create_report,get_all_reports_content
 import argparse
+import os
 
 app = Flask(__name__)
-directory  = "./monit"
+directory  = "./monit" if os.name == "nt" else "/var/monit"
 
 @app.route('/', methods=['GET'])
 def index():
