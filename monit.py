@@ -99,8 +99,12 @@ def get_last_report(directory:str)->dict:
     
 def get_report(name:str, directory:str)->dict:
     create_report_directory(directory)
-    with open(f"{directory}/{name}", "r") as f:
-        return json.load(f)
+    if os.path.exists(f"{directory}/{name}"):
+        with open(f"{directory}/{name}", "r") as f:
+            return json.load(f)
+    else:
+        log(f"Report {name} doesn't exist")
+        return None
     
 def get_reports_younger_than(hours:int, directory:str)->list:
     create_report_directory(directory)
@@ -155,7 +159,12 @@ if __name__ == "__main__":
         elif args.parameter[0] == "avg":
             print(get_avg_of_report(int(args.parameter[1]), directory))
         elif args.parameter[0] == "name":
-            print(get_report(args.parameter[1], directory))
+            if (args.parameter[1] == ""):
+                print("Veuillez spécifier le nom du rapport")
+            elif (args.parameter[1].endswith(".json")):
+                print(get_report(args.parameter[1], directory))
+            else:
+                print(get_report(args.parameter[1]+".json", directory))
     else:
         print("Cette commande n'existe pas ! Les commandes disponibles sont : check, list, get voir plus d'infos avec --help")
 
