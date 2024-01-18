@@ -72,6 +72,14 @@ def get_all_reports(directory:str)->list:
     log(f"Get all reports")
     return os.listdir(directory)
 
+def get_all_reports_content(directory:str)->list:
+    create_report_directory(directory)
+    rep=[]
+    for file in os.listdir(directory):
+        with open(f"{directory}/{file}", "r") as f:
+            rep.append(json.load(f))
+    return rep
+
 def get_last_report(directory:str)->dict:
     create_report_directory(directory)
     last=None
