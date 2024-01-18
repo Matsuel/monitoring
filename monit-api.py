@@ -13,14 +13,18 @@ def get_reports():
 def get_last():
     return jsonify(get_last_report(directory))
 
+@app.route('/api/v1.0/report', methods=['GET'])
+def name_required():
+    return jsonify({"error": "Name required"})
+
 @app.route('/api/v1.0/report/<string:name>', methods=['GET'])
 def get_report_by_name(name):
-    if not name:
-        return "Name is required", 400
-    elif name.endswith(".json"):
+    if name.endswith(".json"):
         return jsonify(get_report(name, directory))
     else:
         return jsonify(get_report(f"{name}.json", directory))
+    
+
 
 if (__name__ == "__main__"):
     app.run(debug=True, port=5000)
