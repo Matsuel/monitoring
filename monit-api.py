@@ -6,6 +6,8 @@ import os
 
 app = Flask(__name__)
 directory  = "./monit" if os.name == "nt" else "/var/monit"
+directory_log = "./log" if os.name == "nt" else "/var/log/monit"
+directory_config = "./config" if os.name == "nt" else "/etc/monit"
 
 @app.route('/', methods=['GET'])
 def index():
