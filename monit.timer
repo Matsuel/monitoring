@@ -1,8 +1,9 @@
 [Unit]
-Description="Timer exécutant toutes 10 secondes le service de check"
+Description=Timer exécutant toutes les 10 secondes le service de check
 
 [Timer]
-Unit=monit.service
+OnBootSec=1min
 OnUnitActiveSec=10s
 
-#Finir ça
+[Install]
+WantedBy=timers.target
