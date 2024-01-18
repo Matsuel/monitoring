@@ -141,7 +141,7 @@ if __name__ == "__main__":
     # parser.add_argument("--get_last", action="store_true", help="Renvoie le dernier rapport json")
     # parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
     # args = parser.parse_args()
-    
+
     parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
     parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
     args = parser.parse_args()

@@ -24,6 +24,13 @@ def get_report_by_name(name):
     else:
         return jsonify(get_report(f"{name}.json", directory))
     
+@app.route('/api/v1.0/avg', methods=['GET'])
+def hours_required():
+    return jsonify({"error": "Hours required"})
+
+@app.route('/api/v1.0/avg/<int:hours>', methods=['GET'])
+def get_avg(hours):
+    return jsonify(get_avg_of_report(hours, directory))
 
 
 if (__name__ == "__main__"):
