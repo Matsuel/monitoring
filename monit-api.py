@@ -4,7 +4,7 @@ from monit import get_report, get_all_reports, get_last_report, get_avg_of_repor
 import argparse
 
 app = Flask(__name__)
-directory  = "./monit"
+directory  = "/var/monit"
 
 #Get all reports names
 @app.route('/api/v1.0/list', methods=['GET'])
