@@ -12,29 +12,28 @@ def get_reports():
     return jsonify({"reports": get_all_reports(directory)})
 
 #Get last report content
-@app.route('/api/v1.0/last', methods=['GET'])
+@app.route('/api/v1.0/get/last', methods=['GET'])
 def get_last():
     return jsonify(get_last_report(directory))
 
 #Get report content by name if name is provided
-@app.route('/api/v1.0/report', methods=['GET'])
+@app.route('/api/v1.0/get/report', methods=['GET'])
 def name_required():
-    return jsonify({"error": "Name required"})
+    return jsonify({"error": "Report name required"})
 
-@app.route('/api/v1.0/report/<string:name>', methods=['GET'])
+@app.route('/api/v1.0/get/report/<string:name>', methods=['GET'])
 def get_report_by_name(name):
     if name.endswith(".json"):
         return jsonify(get_report(name, directory))
     else:
         return jsonify(get_report(f"{name}.json", directory))
-    
 
 #Get reports younger than hours if hours is provided
-@app.route('/api/v1.0/avg', methods=['GET'])
+@app.route('/api/v1.0/get/avg', methods=['GET'])
 def hours_required():
     return jsonify({"error": "Hours required"})
 
-@app.route('/api/v1.0/avg/<int:hours>', methods=['GET'])
+@app.route('/api/v1.0/get/avg/<int:hours>', methods=['GET'])
 def get_avg(hours):
     return jsonify(get_avg_of_report(hours, directory))
 
