@@ -2,8 +2,8 @@
 Description=Timer exécutant toutes les 10 secondes le service de check
 
 [Timer]
-OnBootSec=1min
-OnUnitActiveSec=5
+OnBootSec=10s
+OnUnitActiveSec=10s
 
 [Install]
 WantedBy=timers.target
