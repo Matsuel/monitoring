@@ -1,10 +1,12 @@
 from  flask import Flask, jsonify, redirect, abort
+from swagger_ui import api_doc
 import json
 from monit import get_report, get_all_reports, get_last_report, get_avg_of_report, create_report,get_all_reports_content
 import argparse
 import os
 
 app = Flask(__name__)
+api_doc(app, config_path="./swagger.yml", url_prefix="/doc")
 directory  = "./monit" if os.name == "nt" else "/var/monit"
 directory_log = "./log" if os.name == "nt" else "/var/log/monit"
 directory_config = "." if os.name == "nt" else "/etc/monit"
