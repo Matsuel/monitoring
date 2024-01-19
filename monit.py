@@ -179,13 +179,3 @@ if __name__ == "__main__":
                 print(get_report(args.parameter[1]+".json", directory))
     else:
         print("Cette commande n'existe pas ! Les commandes disponibles sont : check, list, get voir plus d'infos avec --help")
-
-
-# if args.check:
-#     save_report(create_report(), directory)
-# elif args.list:
-#     print(get_all_reports(directory))
-# elif args.get_last:
-#     print(get_last_report(directory))
-# elif args.get_avg:
-#     print(get_avg_of_report(int(args.get_avg[0]), directory))
