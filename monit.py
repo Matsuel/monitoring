@@ -43,8 +43,15 @@ def get_ports_open()->dict:
     used_ports = get_used_ports()
     ports = get_config()["portsRange"]
     rep={}
+    use_ports=[]
+    notInUse_ports=[]
     for port in ports:
-        rep[port] = not_in_list(used_ports, port)
+        if port in used_ports:
+            use_ports.append(port)
+        else:
+            notInUse_ports.append(port)
+    rep["inUse"] = use_ports
+    rep["notInUse"] =   notInUse_ports
     return rep
 
 def create_report()->dict:
