@@ -48,7 +48,7 @@ def get_report_by_name(ID):
     report = get_report(ID, directory) if ID.endswith(".json") else get_report(f"{ID}.json", directory)
     if not ID:
         return jsonify({"error": "Report name required"}), 400
-    return jsonify(report) if report is not None else jsonify({"error": "No report found"}), 404
+    return jsonify(report) if report is not None else abort(404)
 
 #Get reports younger than hours if hours is provided
 @app.route('/reports/avg/<int:hours>', methods=['GET'])
@@ -56,20 +56,16 @@ def get_avg(hours):
     report = get_avg_of_report(hours, directory)
     if not hours:
         return jsonify({"error": "Hours required"}), 400
-    return jsonify(report),200 if report is not None else jsonify({"error": "No reports found for this period"}), 404
+    return jsonify(report),200 if report is not None else abort(404)
 
 
 @app.route('/check', methods=['GET'])
 def check():    
     return jsonify({"report": create_report()}),200
 
-@app.route('/<path:dummy>')
-def redirect_error(dummy):
-    return redirect("/usage", code=302)
-
 @app.errorhandler(404)
-def page_not_found(e):
-    return redirect("/usage", code=302)
+def not_found(error):
+    return jsonify({"error": "Not found"}), 404
 
 if (__name__ == "__main__"):
     argparser = argparse.ArgumentParser()

@@ -57,7 +57,7 @@ def get_ports_open()->dict:
 def create_report()->dict:
     return {
         "id": str(uuid.uuid4()),
-        "date": time.strftime("%d/%m/%Y %H:%M:%S"),
+        "date": int(time.time()),
         "boot_time": boot_time(),
         "cpu": get_cpu_usage(),
         "memory": get_memory_usage(),
