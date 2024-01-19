@@ -67,4 +67,17 @@ paths:
           schema:
             type: object
 
-  
+  /reports/avg/{hours}:
+    get:
+      summary: Get average report for last {hours} hours
+      parameters:
+        - name: hours
+          in: path
+          description: Hours
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
