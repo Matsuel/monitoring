@@ -1,3 +1,4 @@
 monit/
 log/
 config/
+__pycache__/

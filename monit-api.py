@@ -1,4 +1,4 @@
-from  flask import Flask, jsonify, request, redirect, abort
+from  flask import Flask, jsonify, redirect, abort
 import json
 from monit import get_report, get_all_reports, get_last_report, get_avg_of_report, create_report,get_all_reports_content
 import argparse
@@ -19,25 +19,25 @@ def usage():
         "get": {
             "/reports": "Get all reports content",
             "/reports/<string:ID>": "Get report content by ID, ID is report name",
-            "/get/avg/<int:hours>": "Get average of reports younger than hours",
-            "/get/last": "Get last report",
-            "/list": "Get all reports names",
+            "/reports/avg/<int:hours>": "Get average of reports younger than hours",
+            "/reports/last": "Get last report",
+            "reports/list": "Get all reports names",
         }
     }})
 
 #Get all reports names
-@app.route('/list', methods=['GET'])
+@app.route('/reports/list', methods=['GET'])
 def get_reports():
-    return jsonify({"reports": get_all_reports(directory)})
+    return jsonify({"reports": get_all_reports(directory)}),200
 
 #Get last report content
-@app.route('/last', methods=['GET'])
+@app.route('/reports/last', methods=['GET'])
 def get_last():
-    return jsonify(get_last_report(directory))
+    return jsonify(get_last_report(directory)),200
 
 @app.route('/reports', methods=['GET'])
 def get_content():
-    return jsonify({"reports": get_all_reports_content(directory)})
+    return jsonify({"reports": get_all_reports_content(directory)}),200
 
 #Get report content by name if name is provided
 @app.route('/reports/<string:ID>', methods=['GET'])
@@ -47,21 +47,21 @@ def get_report_by_name(ID):
         abort(404)
     report = get_report(ID, directory) if ID.endswith(".json") else get_report(f"{ID}.json", directory)
     if not ID:
-        return jsonify({"error": "Report name required"})
-    return jsonify(report) if report is not None else jsonify({"error": "No report found"})
+        return jsonify({"error": "Report name required"}), 400
+    return jsonify(report),200 if report is not None else jsonify({"error": "No report found"}), 404
 
 #Get reports younger than hours if hours is provided
-@app.route('/avg/<int:hours>', methods=['GET'])
+@app.route('/reports/avg/<int:hours>', methods=['GET'])
 def get_avg(hours):
     report = get_avg_of_report(hours, directory)
     if not hours:
-        return jsonify({"error": "Hours required"})
-    return jsonify(report) if report is not None else jsonify({"error": "No reports found for this period"})
+        return jsonify({"error": "Hours required"}), 400
+    return jsonify(report,200) if report is not None else jsonify({"error": "No reports found for this period"}), 404
 
 
 @app.route('/check', methods=['GET'])
 def check():    
-    return jsonify({"report": create_report()})
+    return jsonify({"report": create_report()}),200
 
 @app.route('/<path:dummy>')
 def redirect_error(dummy):
