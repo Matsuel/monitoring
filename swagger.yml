@@ -34,4 +34,13 @@ paths:
           schema:
             type: object
   
+  /reports/list:
+    get:
+      summary: Get reports name list
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+
   
