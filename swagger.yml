@@ -43,4 +43,13 @@ paths:
           schema:
             type: object
 
+  /reports/last:
+    get:
+      summary: Get last report
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+
   
