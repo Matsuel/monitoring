@@ -13,18 +13,6 @@ directory_config = "." if os.name == "nt" else "/etc/monit"
 def index():
     return jsonify({"version": "1.0"})
 
-@app.route('/usage', methods=['GET'])
-def usage():
-    return jsonify({"usage": {
-        "get": {
-            "/reports": "Get all reports content",
-            "/reports/<string:ID>": "Get report content by ID, ID is report name",
-            "/reports/avg/<int:hours>": "Get average of reports younger than hours",
-            "/reports/last": "Get last report",
-            "reports/list": "Get all reports names",
-        }
-    }})
-
 #Get all reports names
 @app.route('/reports/list', methods=['GET'])
 def get_reports():
