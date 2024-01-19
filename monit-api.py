@@ -33,7 +33,7 @@ def get_content():
 @app.route('/reports/<string:ID>', methods=['GET'])
 def get_report_by_name(ID):
     reports_names = get_all_reports(directory)
-    if ID not in reports_names:
+    if ID not in reports_names and f"{ID}.json" not in reports_names:
         abort(404)
     report = get_report(ID, directory) if ID.endswith(".json") else get_report(f"{ID}.json", directory)
     if not ID:
