@@ -5,6 +5,7 @@ import argparse
 import uuid
 import os
 import logging
+from datetime import datetime
 
 def get_config()->dict:
     with open(f"{directory_config}/config.json", "r") as f:
@@ -25,8 +26,8 @@ def get_disk_space()->dict:
         rep[partition.mountpoint] = round(partiton_infos[1]/partiton_infos[0]*100, 1)
     return rep
 
-def boot_time()->float:
-    return f"{int(time.time() - psutil.boot_time())//60//60} h {int(time.time() - psutil.boot_time())//60%60} min"
+def boot_time()->int:
+    return int(psutil.boot_time())
 
 def get_used_ports()->list:
     useds_ports = psutil.net_connections()

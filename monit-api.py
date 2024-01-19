@@ -48,7 +48,7 @@ def get_report_by_name(ID):
     report = get_report(ID, directory) if ID.endswith(".json") else get_report(f"{ID}.json", directory)
     if not ID:
         return jsonify({"error": "Report name required"}), 400
-    return jsonify(report),200 if report is not None else jsonify({"error": "No report found"}), 404
+    return jsonify(report) if report is not None else jsonify({"error": "No report found"})
 
 #Get reports younger than hours if hours is provided
 @app.route('/reports/avg/<int:hours>', methods=['GET'])
