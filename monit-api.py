@@ -1,4 +1,4 @@
-from  flask import Flask, jsonify, request, redirect
+from  flask import Flask, jsonify, request, redirect, abort
 import json
 from monit import get_report, get_all_reports, get_last_report, get_avg_of_report, create_report,get_all_reports_content
 import argparse
@@ -42,6 +42,9 @@ def get_content():
 #Get report content by name if name is provided
 @app.route('/reports/<string:ID>', methods=['GET'])
 def get_report_by_name(ID):
+    reports_names = get_all_reports(directory)
+    if ID not in reports_names:
+        abort(404)
     report = get_report(ID, directory) if ID.endswith(".json") else get_report(f"{ID}.json", directory)
     if not ID:
         return jsonify({"error": "Report name required"})
