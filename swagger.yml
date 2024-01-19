@@ -52,4 +52,19 @@ paths:
           schema:
             type: object
 
+  /reports/{ID}:
+    get:
+      summary: Get report by ID
+      parameters:
+        - name: ID
+          in: path
+          description: Report ID
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+
   
