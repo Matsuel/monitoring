@@ -16,6 +16,7 @@ fi
 # Installations des dépendances
 pip3 install psutil Flask flask-swagger-ui
 
+# Création des dossiers nécessaires
 mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
 
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
