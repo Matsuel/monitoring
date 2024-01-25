@@ -22,10 +22,13 @@ mkdir -p /var/log/monit
 mkdir -p /etc/monit/conf.d
 mkdir -p /var/monit
 
+# Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
+useradd -m monit
+
 # Change la propriété des dossiers à l'utilisateur actuellement connecté afin qu'il puisse écrire les rapports dedans
-chown -R $SUDO_USER:$SUDO_USER /var/log/monit
-chown -R $SUDO_USER:$SUDO_USER /etc/monit/conf.d
-chown -R $SUDO_USER:$SUDO_USER /var/monit
+chown -R monit:monit /var/log/monit
+chown -R monit:monit /etc/monit/conf.d
+chown -R monit:monit /var/monit
 
 # Copie le fichier config.json dans le dossier /etc/monit/conf.d
 cp config.json /etc/monit/conf.d/
