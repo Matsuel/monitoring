@@ -12,8 +12,12 @@ directory_log = "./log" if os.name == "nt" else "/var/log/monit"
 directory_config = "." if os.name == "nt" else "/etc/monit"
 
 @app.route('/', methods=['GET'])
-def index():
-    return jsonify({"version": "1.0"})
+def doc():
+    return redirect("/doc", code=302)
+
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({"version": "1.0.0"}),200
 
 #Get all reports names
 @app.route('/reports/list', methods=['GET'])

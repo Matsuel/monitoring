@@ -9,7 +9,7 @@ produces:
   - application/json
 
 paths:
-  /:
+  /version:
     get:
       summary: Get API version
       responses:
