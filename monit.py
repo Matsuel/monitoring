@@ -147,9 +147,7 @@ def get_reports_younger_than(hours:int, directory:str)->list:
 def get_avg_of_report(hours:int,directory:str)->dict:
     reports=get_reports_younger_than(hours, directory)
     log(f"Get avg of {hours} last hours")
-    # return reports
     rep=None
-
     for report in reports:
         r=get_report(report, directory)
         if rep is None:
