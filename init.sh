@@ -8,7 +8,7 @@ fi
 # Install python3 and pip3 if not installed
 if ! [ -x "$(command -v python3)" ]; then
     echo 'Error: python is not installed.' >&2
-    sudo apt install python3 python3-pip
+    apt install python3 python3-pip
     echo "Python3 installed"
     exit 1
 fi
