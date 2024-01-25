@@ -59,10 +59,11 @@ def get_process_list()->dict:
     process = psutil.process_iter()
     process_dict = {}
     for p in process:
-        if p.name() in process_dict.keys():
-            process_dict[p.name()].append(p.pid)
-        elif p.name() != "":
-            process_dict[p.name()] = [p.pid]
+        name= p.name().replace(".exe", "").capitalize()
+        if name in process_dict:
+            process_dict[name].append(p.pid)
+        else:
+            process_dict[name] = [p.pid]
     return process_dict
 
 def get_os_infos()->dict:
