@@ -29,6 +29,7 @@ chown -R monit:monit /var/monit
 # Copie le fichier config.json dans le dossier /etc/monit/conf.d
 cp config.json /etc/monit/conf.d/
 cp monit.service monit.timer /etc/systemd/system/
+cp monit.py /var/monit/
 
 # Démarrage automatique de monit dès le démarrage de la machine et démarrage du timer maintenant afin qu'il commence à créer des rapports
 systemctl daemon-reload
