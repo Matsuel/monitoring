@@ -14,13 +14,9 @@ if ! [ -x "$(command -v python3)" ]; then
 fi
 
 # Installations des dépendances
-pip3 install psutil
-pip3 install Flask
-pip3 install flask-swagger-ui
+pip3 install psutil Flask flask-swagger-ui
 
-mkdir -p /var/log/monit
-mkdir -p /etc/monit/conf.d
-mkdir -p /var/monit
+mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
 
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
 useradd -m monit
@@ -32,8 +28,7 @@ chown -R monit:monit /var/monit
 
 # Copie le fichier config.json dans le dossier /etc/monit/conf.d
 cp config.json /etc/monit/conf.d/
-cp monit.service /etc/systemd/system/
-cp monit.timer /etc/systemd/system/
+cp monit.service monit.timer /etc/systemd/system/
 
 # Démarrage automatique de monit dès le démarrage de la machine et démarrage du timer maintenant afin qu'il commence à créer des rapports
 systemctl daemon-reload
