@@ -13,7 +13,7 @@ if ! [ -x "$(command -v python3)" ]; then
     exit 1
 fi
 
-# Install python libraries
+# Installations des dépendances
 pip3 install psutil
 pip3 install Flask
 pip3 install flask-swagger-ui
