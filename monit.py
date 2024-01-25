@@ -54,6 +54,17 @@ def get_ports_open()->dict:
     rep["notInUse"] =   notInUse_ports
     return rep
 
+def get_process_list()->dict:
+    process = psutil.process_iter()
+    process_dict = {}
+    for p in process:
+        if p.name() in process_dict.keys():
+            process_dict[p.name()].append(p.pid)
+        elif p.name() != "":
+            process_dict[p.name()] = [p.pid]
+    return process_dict
+
+
 def create_report()->dict:
     return {
         "id": str(uuid.uuid4()),
@@ -62,7 +73,8 @@ def create_report()->dict:
         "cpu": get_cpu_usage(),
         "memory": get_memory_usage(),
         "disk_space": get_disk_space(),
-        "ports": get_ports_open()
+        "ports": get_ports_open(),
+        "process": get_process_list()
     }
 
 def create_report_directory(directory:str):
@@ -163,27 +175,27 @@ if __name__ == "__main__":
     # parser.add_argument("--get_avg", nargs=1, help="Calcule les valeurs moyennes des X dernières heures de chaque ressource")
     # args = parser.parse_args()
 
-    parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
-    parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
-    args = parser.parse_args()
+    # parser.add_argument("command", help="Commande à executer", choices=["check", "list", "get"])
+    # parser.add_argument("parameter", help="Le paramètre de la commande", nargs='*', default='')
+    # args = parser.parse_args()
 
-    create_config_directory(directory)
-    create_log_file()
-    if args.command == "check":
-        save_report(create_report(), directory)
-    elif args.command == "list":
-        print(get_all_reports(directory))
-    elif args.command == "get":
-        if args.parameter[0] == "last":
-            print(get_last_report(directory))
-        elif args.parameter[0] == "avg":
-            print(get_avg_of_report(int(args.parameter[1]), directory))
-        elif args.parameter[0] == "name":
-            if (args.parameter[1] == ""):
-                print("Veuillez spécifier le nom du rapport")
-            elif (args.parameter[1].endswith(".json")):
-                print(get_report(args.parameter[1], directory))
-            else:
-                print(get_report(args.parameter[1]+".json", directory))
-    else:
-        print("Cette commande n'existe pas ! Les commandes disponibles sont : check, list, get voir plus d'infos avec --help")
+    # create_config_directory(directory)
+    # create_log_file()
+    # if args.command == "check":
+    #     save_report(create_report(), directory)
+    # elif args.command == "list":
+    #     print(get_all_reports(directory))
+    # elif args.command == "get":
+    #     if args.parameter[0] == "last":
+    #         print(get_last_report(directory))
+    #     elif args.parameter[0] == "avg":
+    #         print(get_avg_of_report(int(args.parameter[1]), directory))
+    #     elif args.parameter[0] == "name":
+    #         if (args.parameter[1] == ""):
+    #             print("Veuillez spécifier le nom du rapport")
+    #         elif (args.parameter[1].endswith(".json")):
+    #             print(get_report(args.parameter[1], directory))
+    #         else:
+    #             print(get_report(args.parameter[1]+".json", directory))
+    # else:
+    #     print("Cette commande n'existe pas ! Les commandes disponibles sont : check, list, get voir plus d'infos avec --help")
