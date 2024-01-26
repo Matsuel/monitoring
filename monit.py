@@ -153,7 +153,7 @@ def get_all_reports_content(directory:str)->list:
     """
     create_report_directory(directory)
     rep=[]
-    for file in listdir(directory):
+    for file in get_all_reports(directory):
         if file.endswith(".json"):
             with open(f"{directory}/{file}", "r", encoding="utf-8") as f:
                 rep.append(load(f))
