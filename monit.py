@@ -145,7 +145,7 @@ def get_all_reports(directory:str)->list:
     """
     create_report_directory(directory)
     log("Get all reports")
-    return listdir(directory)
+    return listdir(directory).remove("monit.py")
 
 def get_all_reports_content(directory:str)->list:
     """
