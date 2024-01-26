@@ -145,7 +145,7 @@ def get_all_reports(directory:str)->list:
     """
     create_report_directory(directory)
     log("Get all reports")
-    return listdir(directory)
+    return [report for report in listdir(directory) if report.endswith(".json")]
 
 def get_all_reports_content(directory:str)->list:
     """
