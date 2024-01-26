@@ -40,7 +40,6 @@ def version():
     """
     return jsonify({"version": "1.0.0"}),200
 
-#Get all reports names
 @app.route('/reports/list', methods=['GET'])
 def get_reports():
     """
@@ -78,7 +77,6 @@ def get_report_by_name(identifier):
         return jsonify({"error": "Report name required"}), 400
     return jsonify(report) if report is not None else abort(404)
 
-#Get reports younger than hours if hours is provided
 @app.route('/reports/avg/<int:hours>', methods=['GET'])
 def get_avg(hours):
     """
