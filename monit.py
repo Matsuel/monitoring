@@ -154,8 +154,9 @@ def get_all_reports_content(directory:str)->list:
     create_report_directory(directory)
     rep=[]
     for file in listdir(directory):
-        with open(f"{directory}/{file}", "r", encoding="utf-8") as f:
-            rep.append(load(f))
+        if file.endswith(".json"):
+            with open(f"{directory}/{file}", "r", encoding="utf-8") as f:
+                rep.append(load(f))
     return rep
 
 def get_last_report(directory:str)->dict:
