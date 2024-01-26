@@ -193,7 +193,7 @@ def get_reports_younger_than(hours:int, directory:str)->list:
     create_report_directory(directory)
     rep=[]
     for file in listdir(directory):
-        if time() - path.getmtime(f"{directory}/{file}") < hours*60*60:
+        if time() - path.getmtime(f"{directory}/{file}") < hours*60*60 and file.endswith(".json"):
             rep.append(file)
     return rep
 
