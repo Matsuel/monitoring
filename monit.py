@@ -154,7 +154,8 @@ def get_all_reports_content(directory:str)->list:
     create_report_directory(directory)
     rep=[]
     for i,report in enumerate(get_all_reports(directory)):
-        print(report)
+        if i > 40:
+            break
         with open(f"{directory}/{report}", "r", encoding="utf-8") as f:
             rep.append(load(f))
     return rep
