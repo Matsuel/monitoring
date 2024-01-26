@@ -153,7 +153,9 @@ def get_all_reports_content(directory:str)->list:
     """
     create_report_directory(directory)
     rep=[]
-    for report in get_all_reports(directory):
+    for report,i in get_all_reports(directory):
+        if i==100:
+            break
         with open(f"{directory}/{report}", "r", encoding="utf-8") as f:
             rep.append(load(f))
     return rep
