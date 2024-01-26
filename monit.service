@@ -4,3 +4,4 @@ Description= "Script permettant de récupérer les infos sur les performances de
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/python3 /var/monit/monit.py check
+User=monit
