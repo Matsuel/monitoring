@@ -153,7 +153,7 @@ def get_all_reports_content(directory:str)->list:
     """
     create_report_directory(directory)
     rep=[]
-    for report,i in get_all_reports(directory):
+    for i,report in enumerate(get_all_reports(directory)):
         print(report)
         if i > 30:
             break
