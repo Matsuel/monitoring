@@ -14,7 +14,7 @@ if ! [ -x "$(command -v python3)" ]; then
 fi
 
 # Installations des dépendances
-pip3 install psutil Flask flask-swagger-ui
+pip3 install psutil Flask flask-swagger-ui swagger_ui
 
 # Création des dossiers nécessaires
 mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
