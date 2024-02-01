@@ -42,10 +42,6 @@ chown -R monit:monit /var/log/monit
 chown -R monit:monit /etc/monit/conf.d
 chown -R monit:monit /var/monit
 
-exit
-
-
-
 # Démarrage automatique de monit dès le démarrage de la machine et démarrage du timer maintenant afin qu'il commence à créer des rapports
 systemctl daemon-reload
 systemctl enable monit.timer
