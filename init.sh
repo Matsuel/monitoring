@@ -21,6 +21,7 @@ fi
 
 # Installations des dépendances
 pip3 install psutil Flask swagger-ui-py
+echo "Dependencies installed"
 
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
 useradd -m monit
@@ -40,7 +41,12 @@ chown -R monit:monit /var/log/monit
 chown -R monit:monit /etc/monit/conf.d
 chown -R monit:monit /var/monit
 
+echo "Installation done"
+
 # Démarrage automatique de monit dès le démarrage de la machine et démarrage du timer maintenant afin qu'il commence à créer des rapports
 systemctl daemon-reload
 systemctl enable monit.timer
 systemctl start monit.timer
+
+echo "Monit started"
+exit
