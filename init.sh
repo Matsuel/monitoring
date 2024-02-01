@@ -8,7 +8,7 @@ fi
 # Install python3 and pip3 if not installed
 if ! [ -x "$(command -v python3)" ]; then
     echo 'Error: python is not installed.' >&2
-    dnf python3-pip
+    dnf python3
     echo "Python3 installed"
     exit 1
 fi
