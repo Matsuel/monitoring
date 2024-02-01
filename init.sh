@@ -20,7 +20,7 @@ fi
 
 
 # Installations des dépendances
-pip3 install psutil Flask swagger-ui-py
+pip3 install psutil Flask swagger-ui-py > /dev/null 2>&1
 echo "Dependencies installed"
 
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
