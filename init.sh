@@ -13,14 +13,17 @@ if ! [ -x "$(command -v python3)" ]; then
     exit 1
 fi
 
+
 # Installations des dépendances
 pip3 install psutil Flask swagger-ui-py
 
-# Création des dossiers nécessaires
-mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
-
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
 useradd -m monit
+
+su monit
+
+# Création des dossiers nécessaires
+mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
 
 # Copie le fichier config.json dans le dossier /etc/monit/conf.d
 cp config.json /etc/monit/conf.d/
