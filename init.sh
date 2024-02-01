@@ -24,9 +24,7 @@ pip3 install psutil Flask swagger-ui-py
 echo "Dependencies installed"
 
 # Création d'un utilisateur monit qui sera utilisé pour lancer le script monit.py
-useradd -m monit
-
-su monit
+useradd monit
 
 # Création des dossiers nécessaires
 mkdir -p /var/log/monit /etc/monit/conf.d /var/monit
@@ -49,4 +47,3 @@ systemctl enable monit.timer
 systemctl start monit.timer
 
 echo "Monit started"
-exit
