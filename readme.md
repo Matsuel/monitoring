@@ -1,9 +1,6 @@
 # Systeme de monitoring en python
 
-<img src="./assets/api.svg" width="200px" />
-<img src="./assets/flask.svg" width="200px" />
-<img src="./assets/monitoring.svg" width="200px" />
-<img src="./assets/python.svg" width="200px" />
+<img src="./assets/api.svg" width="200px" /><img src="./assets/flask.svg" width="200px" /><img src="./assets/monitoring.svg" width="200px" /><img src="./assets/python.svg" width="200px" />
 
 ## Installation du service sur votre machine:
 
