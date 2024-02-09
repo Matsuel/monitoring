@@ -216,7 +216,7 @@ def get_avg_of_report(hours:int,directory:str)->dict:
     if rep is not None:
         rep["cpu"] /= len(reports)
         rep["memory"] /= len(reports)
-        return rep
+        return {"cpu": rep["cpu"], "memory": rep["memory"]}
     return None
 
 DIRECTORY = "/var/monit" if name == "posix" else "./monit"
